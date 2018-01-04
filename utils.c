@@ -250,6 +250,7 @@ probe_mbr (struct master_and_dos_boot_sector *BS, unsigned long start_sector1,
 
   /* probe the partition table */
 
+  (void)probed_total_sectors;
   Cmax = 0;
   Hmax = 0;
   Smax = 0;

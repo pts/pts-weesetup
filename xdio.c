@@ -64,16 +64,16 @@
 
 #ifdef WIN32
 
-typedef struct _STORAGE_DEVICE_NUMBER {
+typedef struct _MYSTORAGE_DEVICE_NUMBER {
   DEVICE_TYPE DeviceType;
   ULONG       DeviceNumber;
   ULONG       PartitionNumber;
-} STORAGE_DEVICE_NUMBER, *PSTORAGE_DEVICE_NUMBER;
+} MYSTORAGE_DEVICE_NUMBER, *PMYSTORAGE_DEVICE_NUMBER;
 
 int
 get_disk (char drive, int rdwr)
 {
-  STORAGE_DEVICE_NUMBER d1;
+  MYSTORAGE_DEVICE_NUMBER d1;
   char dn[24];
   HANDLE hd;
   DWORD nr;
@@ -93,7 +93,7 @@ get_disk (char drive, int rdwr)
 
   for (i = 0; i < MAX_DISKS; i++)
     {
-      STORAGE_DEVICE_NUMBER d2;
+      MYSTORAGE_DEVICE_NUMBER d2;
 
       sprintf (dn, "\\\\.\\PhysicalDrive%d", i);
       hd = CreateFile (dn, ((rdwr) ? GENERIC_WRITE : 0) | GENERIC_READ,
@@ -568,7 +568,7 @@ int
 xd_lock (xd_t * xd)
 {
 #ifdef WIN32
-  STORAGE_DEVICE_NUMBER d1;
+  MYSTORAGE_DEVICE_NUMBER d1;
   DWORD nr;
   char dn[8], c;
 
@@ -583,7 +583,7 @@ xd_lock (xd_t * xd)
   for (c = 'C'; c < 'Z'; c++)
     {
       HANDLE hd;
-      STORAGE_DEVICE_NUMBER d2;
+      MYSTORAGE_DEVICE_NUMBER d2;
 
       dn[4] = c;
       hd = CreateFile (dn, GENERIC_READ | GENERIC_WRITE,
